@@ -4,7 +4,6 @@ resource "aws_ecs_cluster" "web-cluster" {
 
 }
 
-#resource "aws_iam_service_linked_role" "ecs" {   aws_service_name = "ecs.amazonaws.com" }
 
 resource "aws_ecs_capacity_provider" "test" {
   name = "capacity-provider-test"
@@ -31,7 +30,7 @@ resource "aws_ecs_service" "service" {
   name            = "web-service"
   cluster         = aws_ecs_cluster.web-cluster.id
   task_definition = aws_ecs_task_definition.task-definition-test.arn
-  desired_count   = 10
+  desired_count   = 2
   ordered_placement_strategy {
     type  = "binpack"
     field = "cpu"
